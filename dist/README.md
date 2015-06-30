@@ -1,3 +1,3 @@
 ## dist
 
-Derived Output goes here, best not to modify
+Derived Output for `Bower` goes here, best not to modify
