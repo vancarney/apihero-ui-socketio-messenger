@@ -1,6 +1,7 @@
 {
   "author": "Van Carney <carney.van@gmail.com>",
-  "name": "apihero-ui",
+  "name": "apihero-ui-project_stub",
+  "asset_paths":["coffee", "jade", "less"],
   "homepage": "",
   "bugs": "",
   "repository": {
