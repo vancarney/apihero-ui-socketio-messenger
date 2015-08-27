@@ -1,4 +1,4 @@
-class ApiHero.WebSock.Messenger extends ApiHero.core.View
+class ApiHero.WebSock.Messenger extends ApiHeroUI.core.View
   tenplate: templates['socketio-messenger/chat-layout']
   subviews:
     '#message-list': ApiHero.WebSock.ChatMessageList

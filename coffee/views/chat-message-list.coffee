@@ -1,4 +1,4 @@
-class ApiHero.WebSock.ChatMessageList extends ApiHero.core.View
+class ApiHero.WebSock.ChatMessageList extends ApiHeroUI.core.View
   template:templates['websock/chat-message-list']
   collection: ApiHero.WebSock.Messages.getInstance()
   messageHandler:(data)->

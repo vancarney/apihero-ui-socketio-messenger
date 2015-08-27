@@ -1,4 +1,4 @@
-class ApiHero.WebSock.ChatInput extends ApiHero.core.View
+class ApiHero.WebSock.ChatInput extends ApiHeroUI.core.View
   template:templates['websock/chat-input']
   events:
     "submit form":(evt)->

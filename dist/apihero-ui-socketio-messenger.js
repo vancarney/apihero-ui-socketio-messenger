@@ -90,7 +90,7 @@ ApiHero.WebSock.ChatInput = (function(superClass) {
 
   return ChatInput;
 
-})(ApiHero.core.View);var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+})(ApiHeroUI.core.View);var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
 ApiHero.WebSock.ChatItem = (function(superClass) {
@@ -104,7 +104,7 @@ ApiHero.WebSock.ChatItem = (function(superClass) {
 
   return ChatItem;
 
-})(ApiHero.core.View);var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+})(ApiHeroUI.core.View);var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
 ApiHero.WebSock.ChatMessageList = (function(superClass) {
@@ -132,7 +132,7 @@ ApiHero.WebSock.ChatMessageList = (function(superClass) {
 
   return ChatMessageList;
 
-})(ApiHero.core.View);var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+})(ApiHeroUI.core.View);var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
 ApiHero.WebSock.Messenger = (function(superClass) {
@@ -182,7 +182,7 @@ ApiHero.WebSock.Messenger = (function(superClass) {
 
   return Messenger;
 
-})(ApiHero.core.View);
+})(ApiHeroUI.core.View);
 /*
   use mincer compiler directives below to include dependencies
 (=) require_tree ./models
