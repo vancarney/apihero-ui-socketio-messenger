@@ -82,11 +82,22 @@ ApiHero.WebSock.ChatInput = (function(superClass) {
     }
   };
 
-  ChatInput.prototype.sendMessage = function() {
-    var mssg;
-    if ((mssg = this.$('input[name=memo]').val()) != null) {
-      return this.trigger('send', mssg);
+  ChatInput.prototype.sendMessage = function(mssg) {
+    if (global.Util.isPhonegap()) {
+      cordova.plugins.Keyboard.close();
     }
+    if ((mssg = this.$('input[name=memo]').val()) != null) {
+      this.model.set({
+        text: mssg
+      });
+    }
+    if (!(this.model.get('text'))) {
+      return;
+    }
+    this.model.save();
+    this.model.clear();
+    this.$('input[name=memo]').val('');
+    return this.$('a.btn.submit').addClass('disabled');
   };
 
   ChatInput.prototype.keyboardOnHandler = function(evt) {
@@ -137,7 +148,7 @@ ApiHero.WebSock.ChatInput = (function(superClass) {
   };
 
   ChatInput.prototype.init = function() {
-    return console.log('ChatInput');
+    return this.model != null ? this.model : this.model = new ApiHero.WebSock.Message;
   };
 
   return ChatInput;
@@ -201,34 +212,7 @@ ApiHero.WebSock.Messenger = (function(superClass) {
     '#message-input': ApiHero.WebSock.ChatInput
   };
 
-  Messenger.prototype.sendMessage = function(mssg) {
-    if (global.Util.isPhonegap()) {
-      cordova.plugins.Keyboard.close();
-    }
-    if (mssg) {
-      this.model.set({
-        text: mssg
-      });
-    }
-    if (!(this.model.get('text'))) {
-      return;
-    }
-    this.model.save();
-    this.model.clear();
-    this.$('input[name=memo]').val('');
-    return this.$('a.btn.submit').addClass('disabled');
-  };
-
-  Messenger.prototype.childrenComplete = function() {
-    return this['#message-input'].on('send', this.sendMessage, this);
-  };
-
   Messenger.prototype.init = function() {
-    var _oHeight;
-    _oHeight = 0;
-    if (this.model == null) {
-      this.model = new ApiHero.WebSock.Message;
-    }
     return this.messanger.on('add', this.messageHandler, this);
   };
 

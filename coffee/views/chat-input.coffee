@@ -16,8 +16,16 @@ class ApiHero.WebSock.ChatInput extends ApiHeroUI.core.View
       evt.preventDefault()
       @sendMessage()
       false
-  sendMessage:->
-    @trigger 'send', mssg if (mssg = @$('input[name=memo]').val())?
+
+  sendMessage:(mssg)->
+    cordova.plugins.Keyboard.close() if global.Util.isPhonegap()
+    @model.set text:mssg if (mssg = @$('input[name=memo]').val())?
+    return unless (@model.get 'text')
+    @model.save()
+    @model.clear()
+    @$('input[name=memo]').val ''
+    @$('a.btn.submit').addClass 'disabled'
+
   keyboardOnHandler:(evt)->
     if global.Util.isMobile() 
       $('nav').addClass 'hidden'
@@ -39,4 +47,4 @@ class ApiHero.WebSock.ChatInput extends ApiHeroUI.core.View
     @$('a.btn.submit')["#{if t.length then 'remove' else 'add'}Class"] 'disabled'
 
   init:->
-    console.log 'ChatInput'
+    @model ?= new ApiHero.WebSock.Message
