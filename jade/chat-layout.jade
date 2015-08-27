@@ -1,0 +1,11 @@
+.col-xs-12.messanger-container#messanger
+  .row.message-list-container
+    ul#message-list.col-xs-12
+  .row.message-input-container
+    form.form-horizontal#message-input(role="form")
+      .form-group.row
+        .col-xs-12.col-sm-10
+          //- span.glyphicon.glyphicon-comment.form-control-feedback("aria-hidden"="true")
+          input.form-control.pull-left(type="text", name="memo", placeholder="type message here", "aria-describedby"="inputSearch2Status")
+        .col-sm-2.hidden-xs
+          a.btn.btn-primary.disabled.submit send

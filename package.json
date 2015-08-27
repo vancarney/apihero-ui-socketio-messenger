@@ -1,7 +1,11 @@
 {
   "author": "Van Carney <carney.van@gmail.com>",
-  "name": "apihero-ui-project_stub",
-  "asset_paths":["coffee", "jade", "less"],
+  "name": "apihero-ui-socketio-messenger",
+  "asset_paths": [
+    "coffee",
+    "jade",
+    "less"
+  ],
   "homepage": "",
   "bugs": "",
   "repository": {
@@ -10,24 +14,24 @@
   },
   "version": "0.0.1-alpha",
   "dependencies": {
-    "lodash": "^3.9.3",
-    "uglify-js": "^2.4.15",
     "coffee-script": "^1.9.3",
-    "less":"^2.5.1",
-    "mincer":"^1.3.0"
+    "less": "^2.5.1",
+    "lodash": "^3.9.3",
+    "mincer": "^1.3.0",
+    "uglify-js": "^2.4.15"
   },
   "devDependencies": {
-	"mocha": "^2.2.5",
+    "mocha": "^2.2.5",
     "chai": "^3.0.0",
-  	"supertest": "^1.0.1",
-  	"loopback-testing": "^1.1.0",
-  	"apihero-ui":"git+https://github.com/vancarney/backbone-ui#apihero-ui",
-  	"api-hero":"git+https://github.com/vancarney/rikki-tikki#api-hero",
+    "supertest": "^1.0.1",
     "bower": "latest",
+    "loopback-testing": "^1.1.0",
+    "apihero-ui": "git+https://github.com/vancarney/backbone-ui#apihero-ui",
+    "api-hero": "git+https://github.com/vancarney/rikki-tikki#api-hero",
     "docco": "latest",
-    "autoprefixer-core":"latest"
+    "autoprefixer-core": "latest"
   },
-  "scripts":{
-    "test":""
+  "scripts": {
+    "test": "cake test"
   }
 }
