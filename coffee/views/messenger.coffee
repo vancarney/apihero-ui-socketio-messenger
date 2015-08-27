@@ -14,7 +14,7 @@ class ApiHero.WebSock.Messenger extends ApiHeroUI.core.View
     @$('a.btn.submit').addClass 'disabled'
     
   childrenComplete:->
-    @['#messages-input'].on 'send', @sendMessage, @
+    @['#message-input'].on 'send', @sendMessage, @
 
   init:->
     _oHeight = 0

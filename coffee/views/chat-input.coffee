@@ -37,3 +37,6 @@ class ApiHero.WebSock.ChatInput extends ApiHeroUI.core.View
     console.log 'change'
     @model.set text: (t = $(evt.target).val())
     @$('a.btn.submit')["#{if t.length then 'remove' else 'add'}Class"] 'disabled'
+
+  init:->
+    console.log 'ChatInput'
