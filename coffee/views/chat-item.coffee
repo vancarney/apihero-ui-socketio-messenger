@@ -1,2 +1,2 @@
-class ApiHeroUI.WebSock.ChatItem extends ApiHero.core.View
+class ApiHero.WebSock.ChatItem extends ApiHero.core.View
   template:templates['websock/chat-item']

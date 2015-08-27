@@ -5,7 +5,7 @@
 var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
-ApiHeroUI.WebSock.ChatInput = (function(superClass) {
+ApiHero.WebSock.ChatInput = (function(superClass) {
   extend(ChatInput, superClass);
 
   function ChatInput() {
@@ -93,7 +93,7 @@ ApiHeroUI.WebSock.ChatInput = (function(superClass) {
 })(ApiHero.core.View);var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
-ApiHeroUI.WebSock.ChatItem = (function(superClass) {
+ApiHero.WebSock.ChatItem = (function(superClass) {
   extend(ChatItem, superClass);
 
   function ChatItem() {
@@ -107,7 +107,7 @@ ApiHeroUI.WebSock.ChatItem = (function(superClass) {
 })(ApiHero.core.View);var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
-ApiHeroUI.WebSock.ChatMessageList = (function(superClass) {
+ApiHero.WebSock.ChatMessageList = (function(superClass) {
   extend(ChatMessageList, superClass);
 
   function ChatMessageList() {
@@ -116,7 +116,7 @@ ApiHeroUI.WebSock.ChatMessageList = (function(superClass) {
 
   ChatMessageList.prototype.template = templates['websock/chat-message-list'];
 
-  ChatMessageList.prototype.collection = ApiHeroUI.WebSock.Messages.getInstance();
+  ChatMessageList.prototype.collection = ApiHero.WebSock.Messages.getInstance();
 
   ChatMessageList.prototype.messageHandler = function(data) {
     var o;
@@ -135,19 +135,21 @@ ApiHeroUI.WebSock.ChatMessageList = (function(superClass) {
 })(ApiHero.core.View);var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
-ApiHeroUI.WebSock.ChatView = (function(superClass) {
-  extend(ChatView, superClass);
+ApiHero.WebSock.Messenger = (function(superClass) {
+  extend(Messenger, superClass);
 
-  function ChatView() {
-    return ChatView.__super__.constructor.apply(this, arguments);
+  function Messenger() {
+    return Messenger.__super__.constructor.apply(this, arguments);
   }
 
-  ChatView.prototype.subviews = {
-    '#messages-list': ApiHeroUI.WebSock.ChatMessageList,
-    '#messages-input': ApiHeroUI.WebSock.ChatInput
+  Messenger.prototype.tenplate = templates['socketio-messenger/chat-layout'];
+
+  Messenger.prototype.subviews = {
+    '#message-list': ApiHero.WebSock.ChatMessageList,
+    '#message-input': ApiHero.WebSock.ChatInput
   };
 
-  ChatView.prototype.sendMessage = function(mssg) {
+  Messenger.prototype.sendMessage = function(mssg) {
     if (global.Util.isPhonegap()) {
       cordova.plugins.Keyboard.close();
     }
@@ -165,49 +167,22 @@ ApiHeroUI.WebSock.ChatView = (function(superClass) {
     return this.$('a.btn.submit').addClass('disabled');
   };
 
-  ChatView.prototype.render = function() {
-    ChatView.__super__.render.call(this);
-    if (global.Util.isPhonegap()) {
-      return this.$('#messages').addClass('pg-margin');
-    }
+  Messenger.prototype.childrenComplete = function() {
+    return this['#messages-input'].on('send', this.sendMessage, this);
   };
 
-  ChatView.prototype.resize = function(d) {
-    var mrgn, offset;
-    return;
-    if (d == null) {
-      return;
-    }
-    mrgn = (this.$('#messages').css('margin-top')) || 0;
-    if (typeof mrgn === 'string') {
-      mrgn = parseInt(mrgn.replace('px', ''));
-    }
-    offset = $('nav').css('display') === 'none' ? 85 : 100;
-    offset = offset - (global.Util.isPhonegap() ? 23 : 0);
-    return this.$('#messages').height(d.height - (offset + mrgn));
-  };
-
-  ChatView.prototype.init = function() {
+  Messenger.prototype.init = function() {
     var _oHeight;
     _oHeight = 0;
-    this.model = new yungcloud.Message;
-    this.messanger.on('add', this.messageHandler, this);
-    window.addEventListener('native.keyboardshow', (function(_this) {
-      return function() {
-        _oHeight = _this.$('#messages').height();
-        return _this.$('#messages').css('height', _oHeight + 50);
-      };
-    })(this));
-    return window.addEventListener('native.keyboardhide', (function(_this) {
-      return function() {
-        return _this.$('#messages').css('height', _oHeight + 2);
-      };
-    })(this));
+    if (this.model == null) {
+      this.model = new ApiHero.WebSock.Message;
+    }
+    return this.messanger.on('add', this.messageHandler, this);
   };
 
-  return ChatView;
+  return Messenger;
 
-})(ApiHeroUI.core.View);
+})(ApiHero.core.View);
 /*
   use mincer compiler directives below to include dependencies
 (=) require_tree ./models

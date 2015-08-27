@@ -1,8 +1,8 @@
-class ApiHeroUI.WebSock.Messenger extends ApiHeroUI.core.View
+class ApiHero.WebSock.Messenger extends ApiHero.core.View
   tenplate: templates['socketio-messenger/chat-layout']
   subviews:
-    '#message-list': ApiHeroUI.WebSock.ChatMessageList
-    '#message-input': ApiHeroUI.WebSock.ChatInput
+    '#message-list': ApiHero.WebSock.ChatMessageList
+    '#message-input': ApiHero.WebSock.ChatInput
   
   sendMessage:(mssg)->
     cordova.plugins.Keyboard.close() if global.Util.isPhonegap()
@@ -18,7 +18,7 @@ class ApiHeroUI.WebSock.Messenger extends ApiHeroUI.core.View
 
   init:->
     _oHeight = 0
-    @model ?= new ApiHeroUI.WebSock.Message
+    @model ?= new ApiHero.WebSock.Message
     @messanger.on 'add', @messageHandler, @
     # window.addEventListener 'native.keyboardshow', =>
       # _oHeight = @$('#messages').height()
