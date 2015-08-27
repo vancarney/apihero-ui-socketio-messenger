@@ -1,8 +1,56 @@
-
-;
-
-;
 var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+ApiHero.WebSock.Message = (function(superClass) {
+  extend(Message, superClass);
+
+  function Message() {
+    return Message.__super__.constructor.apply(this, arguments);
+  }
+
+  Message.prototype.header = {
+    type: "Message"
+  };
+
+  Message.prototype.initialize = function() {
+    this.header.type = 'Message';
+    return Message.__super__.initialize.apply(this, arguments);
+  };
+
+  Message.prototype.save = function(to_room) {
+    var ref;
+    this.header.room_id = to_room;
+    if (!(((ref = this.attributes.text) != null ? ref.length : void 0) && (this.header.room_id != null))) {
+      return;
+    }
+    return Message.__super__.save.apply(this, arguments);
+  };
+
+  return Message;
+
+})(ApiHero.WebSock.StreamModel);var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+ApiHero.WebSock.Messages = (function(superClass) {
+  extend(Messages, superClass);
+
+  function Messages() {
+    return Messages.__super__.constructor.apply(this, arguments);
+  }
+
+  Messages.prototype.model = ApiHero.WebSock.Message;
+
+  Messages.prototype.add = function(attr, opts) {
+    return Messages.__super__.add.call(this, attr, opts);
+  };
+
+  Messages.getInstance = function() {
+    return this.__instance != null ? this.__instance : this.__instance = new this;
+  };
+
+  return Messages;
+
+})(ApiHero.WebSock.StreamCollection);var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
 ApiHero.WebSock.ChatInput = (function(superClass) {
