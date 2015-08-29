@@ -63,6 +63,11 @@ ApiHero.WebSock.ChatInput = (function(superClass) {
   ChatInput.prototype.template = templates['websock/chat-input'];
 
   ChatInput.prototype.events = {
+    "submit": function(evt) {
+      evt.preventDefault();
+      this.sendMessage();
+      return false;
+    },
     "submit form": function(evt) {
       evt.preventDefault();
       this.sendMessage();
@@ -82,7 +87,8 @@ ApiHero.WebSock.ChatInput = (function(superClass) {
     }
   };
 
-  ChatInput.prototype.sendMessage = function(mssg) {
+  ChatInput.prototype.sendMessage = function() {
+    var mssg;
     if (global.Util.isPhonegap()) {
       cordova.plugins.Keyboard.close();
     }

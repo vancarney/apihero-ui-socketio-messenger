@@ -1,6 +1,10 @@
 class ApiHero.WebSock.ChatInput extends ApiHeroUI.core.View
   template:templates['websock/chat-input']
   events:
+    "submit":(evt)->
+      evt.preventDefault()
+      @sendMessage()
+      false
     "submit form":(evt)->
       evt.preventDefault()
       @sendMessage()
@@ -17,7 +21,7 @@ class ApiHero.WebSock.ChatInput extends ApiHeroUI.core.View
       @sendMessage()
       false
 
-  sendMessage:(mssg)->
+  sendMessage:->
     cordova.plugins.Keyboard.close() if global.Util.isPhonegap()
     @model.set text:mssg if (mssg = @$('input[name=memo]').val())?
     return unless (@model.get 'text')
