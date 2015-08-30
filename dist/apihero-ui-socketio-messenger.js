@@ -188,11 +188,14 @@ ApiHero.WebSock.ChatMessageList = (function(superClass) {
   ChatMessageList.prototype.collection = ApiHero.WebSock.Messages.getInstance();
 
   ChatMessageList.prototype.messageHandler = function(data) {
-    var o;
-    console.log('messageHandler:');
-    console.log(data);
-    o = _.extend({}, data.attributes, data.header.__user);
-    return this.$el.append(this.messageTemplate(o));
+    var itm, o;
+    o = _.extend({}, {
+      body: data.attributes
+    }, {
+      header: data.header
+    });
+    this.$el.append(itm = this.messageTemplate(o));
+    return this.trigger('added-item', itm);
   };
 
   ChatMessageList.prototype.init = function() {
